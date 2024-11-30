@@ -1,3 +1,17 @@
+/////////////////////////////////////////////////////////
+//                                                     //
+//               Sistemas Operacionais                 //
+//           Escalonamento por prioridades             //
+//                                                     //
+//  Feito por..: Pedro Henrique de Almeida             //
+//  Matricula..: 2022.1.08.045                         //
+//  Feito por..: Jorran Luka Andrade dos Santos        //
+//  Matricula..: 2022.2.08.001                         //
+//  Professor..: Fellipe Guilherme Rey de Souza        //
+//  Data.......: 30 de novembro de 2024                //
+//                                                     //
+/////////////////////////////////////////////////////////
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -154,19 +168,25 @@ int main() {
     int tempoAtual = 0; 
     int id = 0;
     int tamMaxProcesso = 0;
+    char c;
 
-    // Define o tamanho da memória com base na entrada do usuário
-    printf("Digite o tamanho da memória: ");
-    scanf("%d", &tamanho);
+    // Loop para garantir entrada válida
+    while (1) { 
+            printf("Digite o tamanho da memória: ");
+            
+            if (scanf("%d", &tamanho) != 1) { // Verifica se a entrada é um número
+                printf("Entrada inválida! Por favor, insira apenas números.\n");
+                while ((c = getchar()) != '\n' && c != EOF);
+            } else if (tamanho < 5) { // Verifica se o número é menor que 5
+                printf("O tamanho da memória inválido. Digite um número maior ou igual a 5.\n");
+            }else{
+                break; // Saída do loop se a entrada for válida
+            }
+        }
 
-    // Ajusta o tamanho máximo de processo dependendo do tamanho da memória
-    if (tamanho > 50) {
-        tamMaxProcesso = 10;
-    } else if (tamanho < 10) {
-        tamMaxProcesso = 3;
-    } else {
-        tamMaxProcesso = 5;
-    }
+    // Tamanho máximo de processo
+    tamMaxProcesso = 5;
+
 
     inicializarMemoria(tamanho);
 
